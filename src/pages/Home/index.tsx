@@ -6,7 +6,7 @@ import ClickProdutos from "../../components/BtnPadraoSalvar/indexBtn";
 
 const Home : FC = () =>{
     const [produtos, setProdutos] = useState<IProduto[]>([]); 
-    const [botaoProdutos, setBotaoProdutos] = useState(false);
+    // const [botaoProdutos, setBotaoProdutos] = useState(false);
 
     const carregaProdutos = async() => {
         const response = await apiGet("/produtos/");
@@ -36,9 +36,8 @@ const Home : FC = () =>{
                             <div className="produto_preco">
                                 <p>R$ {produto.preco}.00</p>
                                 <ClickProdutos 
-                                    onClick={(botaoProdutos : true) => {
-                                        setBotaoProdutos(botaoProdutos);
-                                    }}
+                                    onClick={() => console.log('Click botão')} 
+                                    url={`/produtos/detalhes/${produto.id}`}                                     
                                 />
                             </div>
                        </div>

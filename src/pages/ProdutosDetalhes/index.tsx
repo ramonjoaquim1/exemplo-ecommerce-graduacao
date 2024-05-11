@@ -38,10 +38,9 @@ const ProdutosDetalhe: FC = () => {
                     </div>
                     <br />
                     <ClickProdutos 
-                    onClick={(botaoProdutos :true) => {
-                        setBotaoProdutos(botaoProdutos);
-                    }}
-                />
+                        onClick={() => console.log('Click botão')} 
+                        url={`#`}                                     
+                    />
                 </div>
                
             </div>

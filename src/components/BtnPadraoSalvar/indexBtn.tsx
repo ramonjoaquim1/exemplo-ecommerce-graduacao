@@ -3,19 +3,20 @@ import "./indexBtn.css";
 import { MdAddShoppingCart } from "react-icons/md";
 
 interface IBtnProdutos {
-    onClick : (event : any) => void;
+    onClick : () =>void;
+    url: string;
 }
 
-const ClickProdutos: FC<IBtnProdutos> = ({
-    onClick
-}) => {
+const ClickProdutos: FC<IBtnProdutos> = ({onClick,url}) => {
+    const indentificadorBotao = () => {
+        console.log('teste botão')
+        onClick();
+        window.location.href = url;
+    };
     return (
         <div>
-            <button className="btnTeste" onClick={(event) => {
-                console.log('Teste botão...',event);
-                onClick(event.button);
-                alert('Teste click button');
-            }}>Comprar <MdAddShoppingCart style={{ verticalAlign: 'middle', marginLeft: '1px' }} /> </button>
+            <button className="btnTeste" onClick={indentificadorBotao}>
+            Comprar <MdAddShoppingCart style={{ verticalAlign: 'middle', marginLeft: '1px' }} /> </button>
         </div>
     );
 }
