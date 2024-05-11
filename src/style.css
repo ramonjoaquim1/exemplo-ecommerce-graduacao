@@ -1,0 +1,26 @@
+/*Pagina principal*/
+.body {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.corpo {
+    max-width: 100%;
+    width: 90%;
+}
+
+.logo {
+    display: flex;
+    width: 100px;
+}
+
+.logo img {
+    width: 75px;
+    height: 49px;
+}
+
+
+.cabecalho {
+    padding-bottom: 2%;
+}

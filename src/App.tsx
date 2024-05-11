@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./style.css";
+import logoSenac from "./pic/logo.png"
+import MenuBar from "./components/MenuBar";
+import Router from "./Router";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { MdMarkEmailUnread } from "react-icons/md";
 
 function App() {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div className="body">
+      <div className="corpo">
+          <header className="cabecalho">
+            <div className="logo">
+              < img src={logoSenac} alt="logo" />
+            </div>
+            <MenuBar /> 
+          </header>
+      <Router />
+      <div className="centered">
+        <FaFacebook/>
+        <FaInstagram/>
+        <MdMarkEmailUnread/>
+        </div>
+      </div>
+   </div>
+   
   );
 }
 
