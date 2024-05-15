@@ -3,13 +3,17 @@ import { useParams } from "react-router-dom";
 import { apiGet, STATU_CODE } from "../../api/RestClient";
 import "./index.css"
 import { IProdutoDetalhe } from "./types";
-import ClickProdutos from "../../components/BtnPadraoSalvar/indexBtn";
+import BotaoPadrao from "../../components/BtnPadrao";
+import InputQuantidade from "../../components/InputQuantidade";
+import { ICarrinhoStore } from "../../store/CarrinhoStore/types";
+import { addCarrinho } from "../../store/CarrinhoStore/carrinhoStore";
 
 
 const ProdutosDetalhe: FC = () => {
     const { codigoProduto } = useParams();
     const [produto, setProduto] = useState<IProdutoDetalhe>();
     const [botaoProdutos, setBotaoProdutos] = useState(false);
+    const [quantidadeProduto, setQuantidadeProduto] = useState<number>();
 
     useEffect(() => { //só executa quando a pág é aberta
         console.log('>>>', codigoProduto);
@@ -36,13 +40,24 @@ const ProdutosDetalhe: FC = () => {
                     <div className="preco-produto">
                         <div className="preco">{`Preço R$: ${produto?.preco}`}</div>
                     </div>
+                    <div className="botao-produto">
+                        <InputQuantidade 
+                            quantidade={quantidadeProduto || 0}
+                            onChange={(quantidade : number) =>{
+                                setQuantidadeProduto(quantidade);
+                            }}    
+                        />
+                        <BotaoPadrao 
+                            label="Adicionar"
+                            onClick={() =>{
+                                if (produto) {
+                                    const carrinhoItem : ICarrinhoStore ={...produto, quantidade: quantidadeProduto || 0}
+                                    addCarrinho(carrinhoItem);
+                                }
+                            }}/>
+                    </div>
                     <br />
-                    <ClickProdutos 
-                        onClick={() => console.log('Click botão')} 
-                        url={`#`}                                     
-                    />
                 </div>
-               
             </div>
         </div>
     </>

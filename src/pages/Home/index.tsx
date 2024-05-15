@@ -2,11 +2,10 @@ import { FC, useEffect, useState } from "react";
 import { STATU_CODE, apiGet } from "../../api/RestClient";
 import { IBtnProduto, IProduto } from "./types";
 import "./index.css";
-import ClickProdutos from "../../components/BtnPadraoSalvar/indexBtn";
+import BotaoPadrao from "../../components/BtnPadrao";
 
 const Home : FC = () =>{
     const [produtos, setProdutos] = useState<IProduto[]>([]); 
-    // const [botaoProdutos, setBotaoProdutos] = useState(false);
 
     const carregaProdutos = async() => {
         const response = await apiGet("/produtos/");
@@ -20,6 +19,12 @@ const Home : FC = () =>{
     useEffect(() => {
         carregaProdutos();
     }, []);
+
+    const redirecionarDetalhesProduto = (idProduto: number) => {
+        if(idProduto) {
+            window.location.href = `/produtos/detalhes/${idProduto}`;
+        }
+    }
 
     return <>
         {produtos?.length ? <> 
@@ -35,10 +40,10 @@ const Home : FC = () =>{
                             </div>
                             <div className="produto_preco">
                                 <p>R$ {produto.preco}.00</p>
-                                <ClickProdutos 
-                                    onClick={() => console.log('Click botão')} 
-                                    url={`/produtos/detalhes/${produto.id}`}                                     
-                                />
+                                <div><BotaoPadrao label="Comprar" onClick={() => { 
+                                    redirecionarDetalhesProduto((produto.id))
+                                }}
+                                /></div>
                             </div>
                        </div>
 

@@ -1,0 +1,14 @@
+.container-botao {
+    width: 100%;
+    max-width: 100%;
+    margin: 2px;
+}
+
+.container-botao button {
+    width: 100%;
+    background-color: #004a8d;
+    color: #F7941D;
+    border-radius: 10px;
+    border-color: #F7941D;
+    padding: 3px;
+}
