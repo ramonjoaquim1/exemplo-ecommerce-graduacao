@@ -5,9 +5,9 @@ import Router from "./Router";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
+import CarrinhoDrawer from "./components/CarrinhoDrawer";
 
 function App() {
-
 
   return (
    <div className="body">
@@ -15,7 +15,14 @@ function App() {
           <header className="cabecalho">
             <div className="logo">
               < img src={logoSenac} alt="logo" />
-            </div>
+            
+
+          <div className="item-carrinho">
+          <CarrinhoDrawer /> 
+          </div>
+
+          </div>
+
             <MenuBar /> 
           </header>
       <Router />
