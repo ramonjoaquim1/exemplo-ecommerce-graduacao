@@ -1,0 +1,9 @@
+.container-login {
+    display: flex;
+    align-items: center;
+}
+
+.texto-login{
+    font-size: 12px;
+    
+}

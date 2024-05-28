@@ -6,6 +6,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import CarrinhoDrawer from "./components/CarrinhoDrawer";
+import IconeLogin from "./components/IconeLogin";
 
 function App() {
 
@@ -15,6 +16,9 @@ function App() {
           <header className="cabecalho">
             <div className="logo">
               < img src={logoSenac} alt="logo" />
+              <div className="item-usuario"> 
+              <IconeLogin/>
+              </div>
             
 
           <div className="item-carrinho">

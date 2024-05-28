@@ -6,7 +6,9 @@ import { IProdutoDetalhe } from "./types";
 import BotaoPadrao from "../../components/BtnPadrao";
 import InputQuantidade from "../../components/InputQuantidade";
 import { ICarrinhoStore } from "../../store/CarrinhoStore/types";
-import { addCarrinho } from "../../store/CarrinhoStore/carrinhoStore";
+import { addCarrinho, carregarCarrinho } from "../../store/CarrinhoStore/carrinhoStore";
+import ConfirmarModal from "../../components/ConfirmarModal";
+
 
 
 const ProdutosDetalhe: FC = () => {
@@ -14,6 +16,8 @@ const ProdutosDetalhe: FC = () => {
     const [produto, setProduto] = useState<IProdutoDetalhe>();
     const [botaoProdutos, setBotaoProdutos] = useState(false);
     const [quantidadeProduto, setQuantidadeProduto] = useState<number>();
+    const [openModal, setOpenModal] = useState<boolean>(false);
+    const carrinho:ICarrinhoStore[] = carregarCarrinho(); 
 
     useEffect(() => { //só executa quando a pág é aberta
         console.log('>>>', codigoProduto);
@@ -22,6 +26,13 @@ const ProdutosDetalhe: FC = () => {
             if (response.status === STATU_CODE.OK) {
                 console.log('>>>', response.data);
                 setProduto(response.data);
+
+                const carrinhoItem = carrinho.find((c: ICarrinhoStore) => c.id === response.data.id );
+            
+                if(carrinhoItem){
+                    setQuantidadeProduto(carrinhoItem.quantidade);
+                }
+            
             }
         });
 
@@ -50,16 +61,37 @@ const ProdutosDetalhe: FC = () => {
                         <BotaoPadrao 
                             label="Adicionar"
                             onClick={() =>{
-                                if (produto) {
-                                    const carrinhoItem : ICarrinhoStore ={...produto, quantidade: quantidadeProduto || 0}
-                                    addCarrinho(carrinhoItem);
-                                }
+                                // if (produto) {
+                                //     const carrinhoItem : ICarrinhoStore ={...produto, quantidade: quantidadeProduto || 0}
+                                //     addCarrinho(carrinhoItem);
+                                // }
+                                setOpenModal(true);
                             }}/>
                     </div>
                     <br />
                 </div>
             </div>
         </div>
+        <ConfirmarModal 
+        open={openModal}
+            titulo="Add Carrinho" 
+            mensagem="Confirmar adição de produto ao carrinho" 
+            // open={false}  
+            onCancelar={() =>{
+                setOpenModal(false);
+            }}
+            onConfirmar={() =>{
+                if(produto){
+                    const carrinhoItem: ICarrinhoStore =
+                    {...produto, quantidade: quantidadeProduto || 0              }
+
+                    addCarrinho(carrinhoItem);
+
+                    window.location.href = "/home";
+            }
+        setOpenModal(false);
+            }
+        }/>
     </>
 }
 
